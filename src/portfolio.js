@@ -78,6 +78,14 @@ const YourPortfo = ({ formData, onInputChange }) => {
         />
     </FormItem>
 
+    <FormItem htmlFor="achievements" top="Достижения, награды">
+        <Textarea id="achievements" value={formData.achievements} onChange={(e) => onInputChange('achievements', e.target.value)} name="achievements"/>
+    </FormItem>
+
+    <FormItem htmlFor="additionalEducation" top="Дополнительное образование">
+        <Input id="additionalEducation" value={formData.additionalEducation} onChange={(e) => onInputChange('additionalEducation', e.target.value)} name="additionalEducation"/>
+    </FormItem>
+
     <FormItem htmlFor="post" top="Желаемая должность">
         <Input id="post" value={formData.post} onChange={(e) => onInputChange('post', e.target.value)} name="post"/>
     </FormItem>
@@ -129,8 +137,12 @@ const YourPortfo = ({ formData, onInputChange }) => {
         </FormItem>
       )}
 
-    <FormItem htmlFor="skills" top="Навыки">
-        <Textarea id="skills" value={formData.skills} onChange={(e) => onInputChange('skills', e.target.value)} name="skills"/>
+    <FormItem htmlFor="profSkills" top="Профессиональные навыки">
+        <Textarea id="profSkills" value={formData.profSkills} onChange={(e) => onInputChange('profSkills', e.target.value)} name="profSkills"/>
+    </FormItem>
+
+    <FormItem htmlFor="softSkills" top="Мягкие навыки">
+        <Textarea id="softSkills" value={formData.softSkills} onChange={(e) => onInputChange('softSkills', e.target.value)} name="softSkills"/>
     </FormItem>
 
     <FormItem htmlFor="about" top="О себе">

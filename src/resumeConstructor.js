@@ -20,13 +20,16 @@ const ResumeConstructor = () => {
     firstYear: '',
     lastYear: '',
     purpose: '',
+    achievements: '',
+    additionalEducation: '',
     post: '',
     speciality: '',
     isBusy: '',
     workingGraphics: '',
     experience: '',
     graduateWork: '',
-    skills: '',
+    profSkills: '',
+    softSkills: '',
     about: '',
     });
 
