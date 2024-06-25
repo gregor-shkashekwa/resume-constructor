@@ -31,6 +31,7 @@ const DataFilling = ({ formData, onInputChange }) => {
             id="nickname" 
             value={formData.nickname} 
             onChange={(e) => onInputChange('nickname', e.target.value)}
+            required
           />
         </FormItem>
         <FormItem htmlFor="name" top="Имя">
@@ -38,6 +39,7 @@ const DataFilling = ({ formData, onInputChange }) => {
             id="name" 
             value={formData.name} 
             onChange={(e) => onInputChange('name', e.target.value)}
+            required
           />
         </FormItem>
       </FormLayoutGroup>
@@ -98,7 +100,8 @@ const DataFilling = ({ formData, onInputChange }) => {
           id="Телеграм" 
           value={formData.telegram} 
           onChange={(e) => onInputChange('telegram', e.target.value)} 
-          name="telegram" 
+          name="telegram"
+          required
         />
       </FormItem>
 
