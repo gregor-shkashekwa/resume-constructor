@@ -1,7 +1,20 @@
 import React, { useState } from 'react';
 import { FormLayoutGroup, FormItem, Input, CellButton } from '@vkontakte/vkui';
 
-const DataFilling = ({ formData, onInputChange }) => {
+interface DataFillingProps {
+  formData: {
+    nickname: string;
+    name: string;
+    patronymic: string;
+    phone: string;
+    email: string;
+    telegram: string;
+    github: string;
+  };
+  onInputChange: (field: string, value: string) => void;
+}
+
+const DataFilling: React.FC<DataFillingProps> = ({ formData, onInputChange }) => {
   const [showPatronymic, setShowPatronymic] = useState(formData.patronymic !== '');
   const [showGithub, setShowGithub] = useState(formData.github !== '');
 
@@ -75,7 +88,7 @@ const DataFilling = ({ formData, onInputChange }) => {
           name="phone"
           aria-labelledby="phone-type"
           required
-          type="tel"
+          type="number"
         />
       </FormItem>
 

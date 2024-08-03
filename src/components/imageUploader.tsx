@@ -1,34 +1,42 @@
 import React, { useState, useRef } from 'react';
-import {Div, Image, Headline, Text} from '@vkontakte/vkui';
+import { Div, Image, Headline, Text } from '@vkontakte/vkui';
 
-const FileUploader = ({ onImageUpload, uploadedImageUrl }) => {
-  const [imageUrl, setImageUrl] = useState(null);
-  const fileInputRef = useRef(null);
+interface ImageUploaderProps {
+  onImageUpload: (imageUrl: string | null) => void;
+  uploadedImageUrl: string | null;
+}
 
-  const handleDragOver = (e) => {
+const ImageUploader: React.FC<ImageUploaderProps> = ({
+  onImageUpload,
+  uploadedImageUrl,
+}) => {
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
-    e.target.classList.add('dragover');
+    e.currentTarget.classList.add('dragover');
   };
 
-  const handleDragLeave = (e) => {
+  const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
-    e.target.classList.remove('dragover');
+    e.currentTarget.classList.remove('dragover');
   };
 
-  const handleDrop = (e) => {
+  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
-    e.target.classList.remove('dragover');
+    e.currentTarget.classList.remove('dragover');
     handleFileSelect(e.dataTransfer.files);
   };
 
-  const handleFileSelect = (files) => {
+  const handleFileSelect = (files: FileList) => {
     if (files.length > 0) {
       const file = files[0];
       const reader = new FileReader();
       reader.onload = (e) => {
-        const imageUrl = e.target.result;
+        const imageUrl = e.target?.result as string;
         setImageUrl(imageUrl);
-        onImageUpload(imageUrl); // Передаем URL изображения в функцию обратного вызова
+        onImageUpload(imageUrl);
       };
       reader.readAsDataURL(file);
     }
@@ -40,7 +48,7 @@ const FileUploader = ({ onImageUpload, uploadedImageUrl }) => {
   };
 
   const handleClick = () => {
-    fileInputRef.current.click();
+    fileInputRef.current?.click();
   };
 
   return (
@@ -60,7 +68,7 @@ const FileUploader = ({ onImageUpload, uploadedImageUrl }) => {
       }}
     >
       {uploadedImageUrl ? (
-        <Div 
+        <Div
           className="image-container"
           style={{
             width: '100vw',
@@ -71,8 +79,8 @@ const FileUploader = ({ onImageUpload, uploadedImageUrl }) => {
             overflow: 'auto',
           }}
         >
-          <Image 
-            src={imageUrl} 
+          <Image
+            src={imageUrl!}
             alt="Uploaded"
             style={{
               width: '280px',
@@ -99,23 +107,28 @@ const FileUploader = ({ onImageUpload, uploadedImageUrl }) => {
           </Div>
         </Div>
       ) : (
-        <Div>
-          <Headline level="2" weight="bold" style={{ marginBottom: 8 }}>
+        <Div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            textAlign: 'center'
+          }}>
+          <Headline weight="2" style={{ marginBottom: 8 }}>
             Добавь фото
           </Headline>
-          <Text level="2" weight="regular" style={{ color: 'var(--vkui--color_text_secondary)' }}>
-            Перетащи или кликни для загрузки
-          </Text>
+          <Div style={{ color: 'var(--vkui--color_text_secondary)' }}>
+            <Text>Перетащи или кликни для загрузки</Text>
+          </Div>
         </Div>
       )}
       <input
         type="file"
         ref={fileInputRef}
         style={{ display: 'none' }}
-        onChange={(e) => handleFileSelect(e.target.files)}
+        onChange={(e) => handleFileSelect(e.target.files as FileList)}
       />
     </Div>
   );
 };
 
-export default FileUploader;
+export default ImageUploader;

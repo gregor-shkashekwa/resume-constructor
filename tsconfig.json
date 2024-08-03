@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react",
+    "baseUrl": ".",
+    "paths": {
+      "@vkontakte/icons": ["./node_modules/@vkontakte/icons/dist/index.d.ts"],
+      "@vkontakte/vk-bridge": ["./node_modules/@vkontakte/vk-bridge/dist/index.d.ts"],
+      "@vkontakte/vk-miniapps-deploy": ["./node_modules/@vkontakte/vk-miniapps-deploy/dist/index.d.ts"],
+      "@vkontakte/vk-tunnel": ["./node_modules/@vkontakte/vk-tunnel/dist/index.d.ts"],
+      "@vkontakte/vkui": ["./node_modules/@vkontakte/vkui/dist/vkui.d.ts"],
+      "pdfmake": ["./node_modules/pdfmake/build/pdfmake.d.ts"]
+    },
+    "typeRoots": ["./node_modules/@types", "./src/types"]
+  },
+  "include": ["src"]
+}
