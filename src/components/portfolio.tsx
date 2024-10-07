@@ -43,6 +43,8 @@ const YourPortfo: React.FC<YourPortfoProps> = ({ formData, onInputChange }) => {
     { value: 'Мастер по обработке цифровой информации', label: 'Мастер по обработке цифровой информации' },
     { value: 'Технические средства защиты информации', label: 'Технические средства защиты информации' },
     { value: 'Программирование в компьютерных системах', label: 'Программирование в компьютерных системах' },
+    { value: 'Твердотельная электроника', label: 'Твердотельная электроника' },
+    { value: 'Оператор информационных систем и ресурсов', label: 'Оператор информационных систем и ресурсов' },
   ];
 
   const handlePurposeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -132,6 +134,7 @@ const YourPortfo: React.FC<YourPortfoProps> = ({ formData, onInputChange }) => {
     <FormItem top="Занятость" htmlFor="is-busy">
         <Select
             id="is-busy"
+            placeholder="Выбери тип занятости"
             value={formData.isBusy || ''}
             onChange={handleIsBusyChange}
             name="isBusy"
@@ -143,6 +146,7 @@ const YourPortfo: React.FC<YourPortfoProps> = ({ formData, onInputChange }) => {
     <FormItem top="График работы" htmlFor="working-graphics">
     <Select
         id="working-graphics"
+        placeholder="Выбери график работы"
         value={selectedWorkingGraphicsOption?.value || ''}
         onChange={handleWorkingGraphicsChange}
         name="workingGraphics"

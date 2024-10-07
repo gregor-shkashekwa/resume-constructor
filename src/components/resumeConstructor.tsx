@@ -4,7 +4,7 @@ import '@vkontakte/vkui/dist/vkui.css';
 import FileUploader from './imageUploader';
 import DataFilling from './contacts';
 import YourPortfo from './portfolio';
-import PDFGenerator from './resumeGenerator';
+import {generatePDF} from './resumeGenerator';
 
 interface ResumeData {
   nickname: string;
@@ -77,6 +77,16 @@ const ResumeConstructor: React.FC = () => {
     setUploadedImageUrl(imageUrl);
   };
 
+  const [warningModal, setWarningModal] = useState(false);
+  const onCloseWarningModal = () => { setWarningModal(false); };
+
+  const handleGeneratePDF = () => {
+    const result = generatePDF(formData, uploadedImageUrl);
+    if (result === null) {
+      setWarningModal(true);
+    }
+  };
+
   return (
     <>
       <PanelHeader>Написать резюме</PanelHeader>
@@ -88,7 +98,7 @@ const ResumeConstructor: React.FC = () => {
           <FormItem>
             <FormLayoutGroup mode="horizontal">
               <FormItem>
-                <PDFGenerator formData={formData} uploadedImageUrl={uploadedImageUrl} />
+              <Button type="submit" size="l" stretched onClick={handleGeneratePDF}>Напечатать</Button>
               </FormItem>
               <FormItem>
                 <Button type="submit" size="l" stretched onClick={onPublishClick}>
@@ -106,6 +116,20 @@ const ResumeConstructor: React.FC = () => {
                 children={
                   <Div style={{ color: 'var(--vkui--color_text_primary)' }}>
                     <Text>Данный функционал находится в стадии разработки.</Text>
+                  </Div>
+                }
+              />
+            </ModalRoot>
+          )}
+          {warningModal && (
+            <ModalRoot activeModal="publish-modal">
+              <ModalCard
+                id="publish-modal"
+                onClose={onCloseWarningModal}
+                header="Предупреждение"
+                children={
+                  <Div style={{ color: 'var(--vkui--color_text_primary)' }}>
+                    <Text>Пожалуйста, проверь, все ли ты заполнил(а) и добавил(а) ли свое фото</Text>
                   </Div>
                 }
               />
