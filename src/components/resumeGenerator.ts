@@ -1,5 +1,6 @@
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
+import bridge from '@vkontakte/vk-bridge';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -86,6 +87,22 @@ export const generatePDF = (formData: FormData, uploadedImageUrl: string | null)
   ) {
     return null;
   } else {
-    pdfMake.createPdf(docDefinition).download('resume.pdf');
+    pdfMake.createPdf(docDefinition).getBase64((base64: any) => {
+      // Добавляем префикс, так как VKWebAppDownloadFile требует data URL
+      const dataUrl = `data:application/pdf;base64,${base64}`;
+
+      // Используем bridge для скачивания через VKWebAppDownloadFile
+      bridge.send("VKWebAppDownloadFile", {
+          url: dataUrl,
+          filename: "resume.pdf"
+      }).catch(() => {
+          // Фоллбек на ручное скачивание
+          const link = document.createElement('a');
+          link.href = dataUrl;
+          link.target = '_blank';
+          link.download = 'resume.pdf';
+          link.click();
+      });
+  });
   }
 }
