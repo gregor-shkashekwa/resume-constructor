@@ -1,9 +1,7 @@
 import React, {useState} from 'react';
 import {PanelHeader, Group, FormItem, Button, FormLayoutGroup, ModalRoot, ModalCard, Div, Text} from "@vkontakte/vkui";
 import '@vkontakte/vkui/dist/vkui.css';
-import FileUploader from './imageUploader';
-import DataFilling from './contacts';
-import YourPortfo from './portfolio';
+import ResumeForm from './forms/resumeForm';
 import {generatePDF} from './resumeGenerator';
 
 interface ResumeData {
@@ -92,9 +90,12 @@ const ResumeConstructor: React.FC = () => {
       <PanelHeader>Написать резюме</PanelHeader>
       <Group>
         <form onSubmit={(e) => e.preventDefault()}>
-          <FileUploader onImageUpload={handleImageUpload} uploadedImageUrl={uploadedImageUrl} />
-          <DataFilling formData={formData} onInputChange={handleInputChange} />
-          <YourPortfo formData={formData} onInputChange={handleInputChange as (field: string, value: string) => void} />
+          <ResumeForm 
+          onImageUpload={handleImageUpload}
+          uploadedImageUrl={uploadedImageUrl}
+          onInputChange={handleInputChange}
+          formData={formData}
+          />
           <FormItem>
             <FormLayoutGroup mode="horizontal">
               <FormItem>
