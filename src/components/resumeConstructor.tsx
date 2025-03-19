@@ -61,22 +61,17 @@ const ResumeConstructor: React.FC = () => {
     }));
   };
 
+  const handleImageUpload = (imageUrl: string | null) => { setUploadedImageUrl(imageUrl); };
+
   const [isPublishModalVisible, setIsPublishModalVisible] = useState(false);
-
-  const onPublishClick = () => {
-    setIsPublishModalVisible(true);
-  };
-
-  const onClosePublishModal = () => {
-    setIsPublishModalVisible(false);
-  };
-
-  const handleImageUpload = (imageUrl: string | null) => {
-    setUploadedImageUrl(imageUrl);
-  };
+  const onPublishClick = () => { setIsPublishModalVisible(true); };
+  const onClosePublishModal = () => { setIsPublishModalVisible(false); };
 
   const [warningModal, setWarningModal] = useState(false);
   const onCloseWarningModal = () => { setWarningModal(false); };
+
+  const [imageWarningModal, setImageWarningModal] = useState(false);
+  const onCloseImageWarningModal = () => { setImageWarningModal(false); };
 
   const handleGeneratePDF = () => {
     const result = generatePDF(formData, uploadedImageUrl);
@@ -95,6 +90,7 @@ const ResumeConstructor: React.FC = () => {
           uploadedImageUrl={uploadedImageUrl}
           onInputChange={handleInputChange}
           formData={formData}
+          setImageWarningModal={setImageWarningModal}
           />
           <FormItem>
             <FormLayoutGroup mode="horizontal">
@@ -131,6 +127,20 @@ const ResumeConstructor: React.FC = () => {
                 children={
                   <Div style={{ color: 'var(--vkui--color_text_primary)' }}>
                     <Text>Пожалуйста, проверь, все ли ты заполнил(а) и добавил(а) ли свое фото</Text>
+                  </Div>
+                }
+              />
+            </ModalRoot>
+          )}
+          {imageWarningModal && (
+            <ModalRoot activeModal="publish-modal">
+              <ModalCard
+                id="publish-modal"
+                onClose={onCloseImageWarningModal}
+                header="Предупреждение"
+                children={
+                  <Div style={{ color: 'var(--vkui--color_text_primary)' }}>
+                    <Text>Пожалуйста, загружай фото в формате PNG или JPG</Text>
                   </Div>
                 }
               />

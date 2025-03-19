@@ -20,6 +20,12 @@ const FioForm: React.FC<FioFormProps> = ({ formData, onInputChange }) => {
     onInputChange('patronymic', '');
   };
 
+  const handleInputChange = (field: string, value: string) => {
+    // Фильтруем ввод, оставляя только русские символы (без пробелов)
+    const filteredValue = value.replace(/[^а-яА-ЯёЁ]/g, ''); // Удаляем все, кроме русских букв
+    onInputChange(field, filteredValue);
+  };
+
   return (
     <>
       <FormLayoutGroup mode="horizontal">
@@ -27,7 +33,7 @@ const FioForm: React.FC<FioFormProps> = ({ formData, onInputChange }) => {
           <Input 
             id="nickname" 
             value={formData.nickname} 
-            onChange={(e) => onInputChange('nickname', e.target.value)}
+            onChange={(e) => handleInputChange('nickname', e.target.value)}
             required
           />
         </FormItem>
@@ -35,7 +41,7 @@ const FioForm: React.FC<FioFormProps> = ({ formData, onInputChange }) => {
           <Input 
             id="name" 
             value={formData.name} 
-            onChange={(e) => onInputChange('name', e.target.value)}
+            onChange={(e) => handleInputChange('name', e.target.value)}
             required
           />
         </FormItem>
@@ -55,7 +61,8 @@ const FioForm: React.FC<FioFormProps> = ({ formData, onInputChange }) => {
           <Input 
             id="patronymic" 
             value={formData.patronymic} 
-            onChange={(e) => onInputChange('patronymic', e.target.value)} aria-labelledby="patronymicDescription" 
+            onChange={(e) => handleInputChange('patronymic', e.target.value)} 
+            aria-labelledby="patronymicDescription" 
           />
         </FormItem>
       )}

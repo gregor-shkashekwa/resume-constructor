@@ -4,11 +4,13 @@ import { Div, Image, Headline, Text } from '@vkontakte/vkui';
 interface ImageUploaderProps {
   onImageUpload: (imageUrl: string | null) => void;
   uploadedImageUrl: string | null;
+  setImageWarningModal: (value: boolean) => void;
 }
 
 const ImageUploader: React.FC<ImageUploaderProps> = ({
   onImageUpload,
   uploadedImageUrl,
+  setImageWarningModal,
 }) => {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -32,6 +34,12 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({
   const handleFileSelect = (files: FileList) => {
     if (files.length > 0) {
       const file = files[0];
+      const validTypes = ['image/png', 'image/jpeg'];
+      if (!validTypes.includes(file.type)) {
+        // If the file type is invalid, trigger the warning modal
+        setImageWarningModal(true);
+        return;
+      }
       const reader = new FileReader();
       reader.onload = (e) => {
         const imageUrl = e.target?.result as string;

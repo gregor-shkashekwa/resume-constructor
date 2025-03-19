@@ -45,14 +45,15 @@ interface ResumeFormProps {
   onInputChange: (field: string, value: string) => void;
   onImageUpload: (imageUrl: string | null) => void; // Обработчик загрузки изображения
   uploadedImageUrl: string | null; // Состояние загруженного изображения
+  setImageWarningModal: (value: boolean) => void;
 }
 
-const ResumeForm: React.FC<ResumeFormProps> = ({ formData, onInputChange, onImageUpload, uploadedImageUrl }) => {
+const ResumeForm: React.FC<ResumeFormProps> = ({ formData, onInputChange, onImageUpload, uploadedImageUrl, setImageWarningModal }) => {
   return (
     <>
       <FormItem>
         <Div>
-          <FileUploader onImageUpload={onImageUpload} uploadedImageUrl={uploadedImageUrl} />
+          <FileUploader onImageUpload={onImageUpload} uploadedImageUrl={uploadedImageUrl} setImageWarningModal={setImageWarningModal} />
         </Div>
       </FormItem>
       <FioForm formData={formData} onInputChange={onInputChange} />

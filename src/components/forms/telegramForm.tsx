@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormItem, Input} from '@vkontakte/vkui';
+import { FormItem, Input } from '@vkontakte/vkui';
 
 interface TelegramFormProps {
   formData: {
@@ -10,13 +10,19 @@ interface TelegramFormProps {
 
 const TelegramForm: React.FC<TelegramFormProps> = ({ formData, onInputChange }) => {
 
+  const handleInputChange = (field: string, value: string) => {
+    // Фильтруем ввод, оставляя только латинские символы
+    const filteredValue = value.replace(/[^a-zA-Z]/g, ''); // Удаляем все, кроме латинских букв
+    onInputChange(field, filteredValue);
+  };
+
   return (
     <>
-      <FormItem htmlFor="Телеграм" top="Телеграм" key="telegram">
+      <FormItem htmlFor="telegram" top="Телеграм" key="telegram">
         <Input 
-          id="Телеграм" 
+          id="telegram" 
           value={formData.telegram} 
-          onChange={(e) => onInputChange('telegram', e.target.value)} 
+          onChange={(e) => handleInputChange('telegram', e.target.value)} 
           name="telegram"
           required
         />

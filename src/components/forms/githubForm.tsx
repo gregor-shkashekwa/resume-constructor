@@ -19,14 +19,14 @@ const GithubForm: React.FC<GithubFormProps> = ({ formData, onInputChange }) => {
   return (
     <>
       {!showGithub ? (
-        <CellButton onClick={onShowGithub}>Указать Github</CellButton>
+        <CellButton onClick={onShowGithub}>Указать Git</CellButton>
       ) : (
         <FormItem
           htmlFor="github"
           removable
           onRemove={onRemoveGithub}
-          top="Github"
-          bottom="Есть Github? Лиды с удовольствием посмотрят код твоих проектов"
+          top="Git"
+          bottom="Есть Git? Лиды с удовольствием посмотрят код твоих проектов"
           bottomId="githubDescription"
         >
           <Input 
