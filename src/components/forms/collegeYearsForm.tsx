@@ -13,11 +13,11 @@ const CollegeYearsForm: React.FC<CollegeYearsFormProps> = ({ formData, onInputCh
 
     return (
     <>
-        <FormItem htmlFor="firstYear" top="Год поступления в колледж">
+        <FormItem htmlFor="firstYear" top="Дата поступления в колледж">
             <Input type="date" id="firstYear" value={formData.firstYear} onChange={(e) => onInputChange('firstYear', e.target.value)} name="firstYear" required/>
         </FormItem>
 
-        <FormItem htmlFor="lastYear" top="Год выпуска из колледжа">
+        <FormItem htmlFor="lastYear" top="Дата выпуска из колледжа">
             <Input id="lastYear" type="date" value={formData.lastYear} onChange={(e) => onInputChange('lastYear', e.target.value)} name="lastYear" required/>
         </FormItem>
     </>
