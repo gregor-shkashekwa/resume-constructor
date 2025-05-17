@@ -15,6 +15,7 @@ import IsBusyForm from './isBusyForm';
 import WorkingGraphicsForm from './workingGraphicsForm';
 import ExperienceForm from './experienceForm';
 import SkillsForm from './skillsForm';
+import AcceptForm from './acceptForm';
 
 interface ResumeData {
   nickname: string;
@@ -46,9 +47,13 @@ interface ResumeFormProps {
   onImageUpload: (imageUrl: string | null) => void; // Обработчик загрузки изображения
   uploadedImageUrl: string | null; // Состояние загруженного изображения
   setImageWarningModal: (value: boolean) => void;
+  isChecked: boolean;
+  onCheckboxChange: (checked: boolean) => void;
 }
 
-const ResumeForm: React.FC<ResumeFormProps> = ({ formData, onInputChange, onImageUpload, uploadedImageUrl, setImageWarningModal }) => {
+const ResumeForm: React.FC<ResumeFormProps> = ({ formData, onInputChange, onImageUpload, uploadedImageUrl, setImageWarningModal, isChecked, 
+  onCheckboxChange }) => {
+    
   return (
     <>
       <FormItem>
@@ -70,6 +75,7 @@ const ResumeForm: React.FC<ResumeFormProps> = ({ formData, onInputChange, onImag
       <WorkingGraphicsForm formData={formData} onInputChange={onInputChange} />
       <ExperienceForm formData={formData} onInputChange={onInputChange} />
       <SkillsForm formData={formData} onInputChange={onInputChange} />
+      <AcceptForm isChecked={isChecked} onCheckboxChange={onCheckboxChange}/>
     </>
   );
 };

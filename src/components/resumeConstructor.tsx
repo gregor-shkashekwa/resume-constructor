@@ -73,6 +73,12 @@ const ResumeConstructor: React.FC = () => {
   const [imageWarningModal, setImageWarningModal] = useState(false);
   const onCloseImageWarningModal = () => { setImageWarningModal(false); };
 
+  const [isChecked, setIsChecked] = useState(false);
+
+    const handleCheckboxChange = (checked: boolean) => {
+        setIsChecked(checked); // Устанавливаем новое состояние чекбокса
+    };
+
   const handleGeneratePDF = () => {
     const result = generatePDF(formData, uploadedImageUrl);
     if (result === null) {
@@ -91,14 +97,16 @@ const ResumeConstructor: React.FC = () => {
           onInputChange={handleInputChange}
           formData={formData}
           setImageWarningModal={setImageWarningModal}
+          isChecked={isChecked} // Передаем состояние чекбокса
+          onCheckboxChange={handleCheckboxChange}
           />
           <FormItem>
             <FormLayoutGroup mode="horizontal">
               <FormItem>
-              <Button type="submit" size="l" stretched onClick={handleGeneratePDF}>Напечатать</Button>
+              <Button type="submit" size="l" stretched disabled={!isChecked} onClick={handleGeneratePDF}>Напечатать</Button>
               </FormItem>
               <FormItem>
-                <Button type="submit" size="l" stretched onClick={onPublishClick}>
+                <Button type="submit" size="l" stretched disabled={!isChecked} onClick={onPublishClick}>
                   Опубликовать
                 </Button>
               </FormItem>
