@@ -16,7 +16,7 @@ const AcceptForm: React.FC<AcceptFormProps> = ({ isChecked, onCheckboxChange }) 
             <FormItem htmlFor="accept">
                 <Checkbox checked={isChecked} onChange={handleChange}>
                     Я даю согласие на обработку персональных данных в соответствии с{' '}
-                    <Link target='_blank' href="https://vk.com/privacy">политикой обработки персональных данных</Link>
+                    <Link target='_blank' href="https://dev.vk.com/ru/privacy-policy">политикой обработки персональных данных</Link>
                 </Checkbox>
             </FormItem>
         </>
