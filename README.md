@@ -71,7 +71,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 
 ### Attention
-This repository is intended for trial use of the new functionality of the main application "NKEiVT. Summary"
+This repository is intended for trial use of the new functionality of the main application "НКЭиВТ. Резюме"
 
 ### Copyright
 @ Kalashnikov Grigoriy Alekseevich, 2024
